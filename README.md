@@ -44,12 +44,17 @@ Requirements:
 create a symbolic link for the exe in the same directory as advib.cmd. As of
 this initial "Alpha 1" release, advib wants the exe in the same directory.
 - The directory structure it expects (like an already existing PS2 folder).
+
 Download ImgBurn:
+
 http://www.imgburn.com/index.php?act=download
+
 Tip: install to the normal location and use the mklink command to create a
 symbolic link.
 Example:
+
 mklink c:\adivb\imgburn.exe "c:\Program Files (x86)\ImgBurn\ImgBurn.exe"
+
 I think of it as "mklink [imaginary] [real]" -- first the one "fake" thing
 you're creating, then the actual thing you're "spoofing" for lack of a better
 term.
@@ -59,9 +64,13 @@ file system (deleting this symbolic link will not break anything).
 
 Optional:
 - fciv: a command line utility available free from Microsoft.
+
 Download FCIV:
+
 https://support.microsoft.com/en-us/kb/841290
+
 advib simply uses this as a command. You can use it outside of advib...
+
 Tips: Extract the self-extracting exe in place then manually copy it some where
 in your "PATH" such as C:\Windows.
 
