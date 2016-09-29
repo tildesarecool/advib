@@ -6,6 +6,13 @@ REM Newer version
 REM Sept 13th 2016
 REM New functionality added
 
+Rem this will output time, like 4:02:19
+for /f "usebackq tokens=7 delims= " %%i in (`NET TIME \\%ComputerName%`) do set currtime=%%i
+Rem this will output the last part, am or pm:
+for /f "usebackq tokens=8 delims= " %%i in (`NET TIME \\%ComputerName%`) do set amorpm=%%i
+
+pause
+
 set gamelist=
 set CDDRIVE=
 SET CONSOLE=
@@ -106,7 +113,7 @@ for /f "usebackq tokens=1 delims= " %%i in (`fciv %CONSOLE%\%GAMENAME%_%console%
 
 echo sha1 hash is %verext%_%shahash% and md5 hash is %verext%_%md5hash%
 
-if not exist gameslog.csv (echo console,game_name,file-type,sha1_hash,date,time > gameslog.csv && echo %console%,%gamename%,%FILE-EXT%,%shahash%,%date%,%time% >> gameslog.csv) else (echo %console%,%gamename%,%FILE-EXT%,%shahash%,%date%,%time% >> gameslog.csv)
+if not exist gameslog.csv (echo console,game_name,file-type,sha1_hash,date,time > gameslog.csv && echo %console%,%gamename%,%FILE-EXT%,%shahash%,%date%,%currtime%%amorpm% >> gameslog.csv) else (echo %console%,%gamename%,%FILE-EXT%,%shahash%,%date%,%currtime%%amorpm% >> gameslog.csv)
 
 
 REM SET GAMENAME=
