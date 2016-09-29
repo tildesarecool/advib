@@ -70,10 +70,9 @@ REM and set the CUE extension variable for verifying
 
 REM if /i "%CONSOLE%" == "ps1" (set FILE-EXT=BIN && set VEREXT=CUE)
 if /i "%DISCTYPE%" == "cd-rom" (
-  set FILE-EXT=BIN && set VEREXT=CUE
-  ) else (
-    SET FILE-EXT=ISO && set VEREXT=ISO
-    )
+  set FILE-EXT=BIN && set VEREXT=CUE)
+  else (
+    SET FILE-EXT=ISO && set VEREXT=ISO)
 
 echo value of FILE-EXT is %FILE-EXT%
 echo value of VEREXT is %VEREXT%
