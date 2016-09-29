@@ -1,4 +1,4 @@
-REM  @echo off
+rem @echo off
 
 REM This version I did on the 11th
 REM And DOES work correctly in every way I can tell
@@ -10,16 +10,21 @@ set gamelist=
 set CDDRIVE=
 SET CONSOLE=
 
+set FILE-EXT=
+set VEREXT=
+
 setlocal EnableDelayedExpansion
 
 REM If only one/the same one every time optical drive will be used at a time
 REM you can set the CDDRIVE variable to a drive letter
 REM such as CDDRIVE=D:
-REM
+
+REM possible bonus feature: use a "title" statement to display the driver
+REM letter advib is using via the CDDRIVE variable
 
 if  [%1]==[] (goto :usagehelp) ELSE set gamelist=%1
 echo value is %gamelist%
-pause
+rem pause
 
 if [%2]==[] (goto :usagehelp) ELSE SET CDDRIVE=%2
 if [%3]==[] (goto :usagehelp) ELSE SET CONSOLE=%3
@@ -28,18 +33,18 @@ echo gamelist is %gamelist%
 echo drive is %CDDRIVE%
 echo console is %CONSOLE%
 
-pause
-if defined gamelist  goto :cotinueon ELSE goto :usagehelp
+rem pause
+if defined gamelist  goto :continueon ELSE goto :usagehelp
 
 
-:cotinueon
+:continueon
 for /f "tokens=1" %%i in (%gamelist%) do (SET GAMENAME=%%i) && (call :RIPVERIFY)
 goto eof
 
 
 :RIPVERIFY
 echo Insert  %GAMENAME% for %CONSOLE% into drive %CDDRIVE%...
-pause
+rem pause
 
 REM blank out the file-ext variable to set a fresh value for each game
 REM on further thought, I could just set the ext variable to bin if %console% is PS1
@@ -54,14 +59,14 @@ REM It doesn't seem to work with "discovery" mode
 REM It seems "read" mode will also work. I don't think there's a an advantage of one over the other
 ImgBurn.exe /mode verify /src %CDDRIVE%  /info "gameinfo\%GAMENAME%_%CONSOLE%.txt" /CLOSEINFO /WAITFORMEDIA
 
-pause
-if exist "gameinfo\%GAMENAME%_%CONSOLE%.txt" (
-  for /f "usebackq tokens=3 delims= " %%z in (`type gameinfo\%GAMENAME%_%CONSOLE%.txt ^| find /i "current profile"`) do set DISCTYPE=%%z)
-  else (
-    echo could not find text file
-    )
+echo right before info text read the values are:
+echo gamelist is %gamelist%
+echo drive is %CDDRIVE%
+echo console is %CONSOLE%
+rem pause
+if exist "gameinfo\%GAMENAME%_%CONSOLE%.txt" (for /f "usebackq tokens=3 delims= " %%z in (`type gameinfo\%GAMENAME%_%CONSOLE%.txt ^| find /i "current profile"`) do set DISCTYPE=%%z)  else (echo could not find text file)
 
-pause
+rem pause
 
 
 REM Based on the extracted disc type, set the file extension to either "bin" or "ISO"
@@ -69,14 +74,11 @@ REM new-and-improved if/else statement: i forgot the "set" part in the ISO set
 REM and set the CUE extension variable for verifying
 
 REM if /i "%CONSOLE%" == "ps1" (set FILE-EXT=BIN && set VEREXT=CUE)
-if /i "%DISCTYPE%" == "cd-rom" (
-  set FILE-EXT=BIN && set VEREXT=CUE)
-  else (
-    SET FILE-EXT=ISO && set VEREXT=ISO)
 
+if /i "%DISCTYPE%" == "cd-rom" (set FILE-EXT=BIN && set VEREXT=CUE)  else (SET FILE-EXT=ISO && set VEREXT=ISO)
 echo value of FILE-EXT is %FILE-EXT%
 echo value of VEREXT is %VEREXT%
-pause
+rem pause
 
 REM made it all the way to here and couldn't find the s:\playstation-rips directory, of course
 REM I ended up just using the regular % ~ d p 0 as the solution (that dp0 expands, even in REMs)
@@ -104,11 +106,7 @@ for /f "usebackq tokens=1 delims= " %%i in (`fciv %CONSOLE%\%GAMENAME%_%console%
 
 echo sha1 hash is %verext%_%shahash% and md5 hash is %verext%_%md5hash%
 
-if not exist gameslog.csv (
-  echo console,game_name,file-type,sha1_hash,date,time > gameslog.csv && echo %console%,%gamename%,%FILE-EXT%,%shahash%,%date%,%time% >> gameslog.csv
-  ) else (
-    echo %console%,%gamename%,%FILE-EXT%,%shahash%,%date%,%time% >> gameslog.csv
-    )
+if not exist gameslog.csv (echo console,game_name,file-type,sha1_hash,date,time > gameslog.csv && echo %console%,%gamename%,%FILE-EXT%,%shahash%,%date%,%time% >> gameslog.csv) else (echo %console%,%gamename%,%FILE-EXT%,%shahash%,%date%,%time% >> gameslog.csv)
 
 
 REM SET GAMENAME=
