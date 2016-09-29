@@ -55,7 +55,11 @@ REM It seems "read" mode will also work. I don't think there's a an advantage of
 ImgBurn.exe /mode verify /src %CDDRIVE%  /info "gameinfo\%GAMENAME%_%CONSOLE%.txt" /CLOSEINFO /WAITFORMEDIA
 
 pause
-if exist "gameinfo\%GAMENAME%_%CONSOLE%.txt" (for /f "usebackq tokens=3 delims= " %%z in (`type gameinfo\%GAMENAME%_%CONSOLE%.txt ^| find /i "current profile"`) do set DISCTYPE=%%z) else (echo could not find text file)
+if exist "gameinfo\%GAMENAME%_%CONSOLE%.txt" (
+  for /f "usebackq tokens=3 delims= " %%z in (`type gameinfo\%GAMENAME%_%CONSOLE%.txt ^| find /i "current profile"`) do set DISCTYPE=%%z)
+  else (
+    echo could not find text file
+    )
 
 pause
 
@@ -65,7 +69,11 @@ REM new-and-improved if/else statement: i forgot the "set" part in the ISO set
 REM and set the CUE extension variable for verifying
 
 REM if /i "%CONSOLE%" == "ps1" (set FILE-EXT=BIN && set VEREXT=CUE)
-if /i "%DISCTYPE%" == "cd-rom" (set FILE-EXT=BIN && set VEREXT=CUE) else (SET FILE-EXT=ISO && set VEREXT=ISO)
+if /i "%DISCTYPE%" == "cd-rom" (
+  set FILE-EXT=BIN && set VEREXT=CUE
+  ) else (
+    SET FILE-EXT=ISO && set VEREXT=ISO
+    )
 
 echo value of FILE-EXT is %FILE-EXT%
 echo value of VEREXT is %VEREXT%
