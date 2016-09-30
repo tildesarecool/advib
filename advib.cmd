@@ -1,4 +1,4 @@
-rem @echo off
+@echo off
 
 REM This version I did on the 11th
 REM And DOES work correctly in every way I can tell
@@ -51,7 +51,8 @@ goto eof
 
 :RIPVERIFY
 echo Insert  %GAMENAME% for %CONSOLE% into drive %CDDRIVE%...
-rem pause
+REM this pause is necessary, not part of debug - leave here.
+pause
 
 REM blank out the file-ext variable to set a fresh value for each game
 REM on further thought, I could just set the ext variable to bin if %console% is PS1
