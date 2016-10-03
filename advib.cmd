@@ -3,22 +3,22 @@
 REM This version I did on the 11th
 REM And DOES work correctly in every way I can tell
 REM Newer version
-REM Sept 13th 2016
+REM Oct 3 2016
 REM New functionality added
 
-Rem this will output time, like 4:02:19
-for /f "usebackq tokens=7 delims= " %%i in (`NET TIME \\%ComputerName%`) do set currtime=%%i
+rem   this will output time, like 4:02:19
+for /f "usebackq tokens=7 delims= " %%i in (`NET TIME \\localhost`) do set currtime=%%i
 Rem this will output the last part, am or pm:
-for /f "usebackq tokens=8 delims= " %%i in (`NET TIME \\%ComputerName%`) do set amorpm=%%i
+for /f "usebackq tokens=8 delims= " %%i in (`NET TIME \\localhost`) do set amorpm=%%i
 
 pause
 
-set gamelist=
-set CDDRIVE=
-SET CONSOLE=
+rem set gamelist=
+rem set CDDRIVE=
+rem SET CONSOLE=
 
-set FILE-EXT=
-set VEREXT=
+rem set FILE-EXT=
+rem set VEREXT=
 
 setlocal EnableDelayedExpansion
 
