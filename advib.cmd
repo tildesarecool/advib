@@ -1,7 +1,12 @@
 set debug=0
+<<<<<<< HEAD
 
 if [%4]==[debug] (set debug=1)
 
+=======
+if [%4]==[debug] set debug=1
+
+>>>>>>> 550fe84fe4165a9fd6688fbd6761ac59f3afd826
 IF %debug%==1 (echo on) else (echo off)
 rem  ELSE (@echo off)
 
