@@ -1,10 +1,13 @@
+@echo off
+
 set debug=0
 
 if [%4]==[debug] (set debug=1)
 
 if [%4]==[debug] set debug=1
 
-IF %debug%==1 (echo on) else (echo off)
+rem IF %debug%==1 (echo on) else (echo off)
+
 rem  ELSE (@echo off)
 
 REM This version I did on the 11th
