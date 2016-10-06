@@ -52,6 +52,8 @@ if %debug%==1 ( echo gamelist is %gamelist% && echo drive is %CDDRIVE% && echo c
 pause
 
 rem pause
+if defined gamelist (echo List of games set to rip and verify: && type %gamelist%)
+pause
 if defined gamelist  goto :continueon ELSE goto :usagehelp
 
 
