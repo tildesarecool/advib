@@ -4,8 +4,6 @@ set debug=0
 
 if [%4]==[debug] (set debug=1)
 
-if [%4]==[debug] set debug=1
-
 rem IF %debug%==1 (echo on) else (echo off)
 
 rem  ELSE (@echo off)
@@ -13,7 +11,7 @@ rem  ELSE (@echo off)
 REM This version I did on the 11th
 REM And DOES work correctly in every way I can tell
 REM Newer version
-REM Oct 3 2016
+REM Oct 5 2016
 REM New functionality added
 
 rem ==debug (set debug=1 && echo Value of debug is %debug%)
@@ -50,6 +48,8 @@ if [%2]==[] (goto :usagehelp) ELSE SET CDDRIVE=%2
 if [%3]==[] (goto :usagehelp) ELSE SET CONSOLE=%3
 
 if %debug%==1 ( echo gamelist is %gamelist% && echo drive is %CDDRIVE% && echo console is %CONSOLE% )
+
+pause
 
 rem pause
 if defined gamelist  goto :continueon ELSE goto :usagehelp
@@ -122,7 +122,7 @@ for /f "usebackq tokens=1 delims= " %%i in (`fciv %CONSOLE%\%GAMENAME%_%console%
 
 if %debug%==1 ( echo sha1 hash is %verext%_%shahash% and md5 hash is %verext%_%md5hash% )
 
-if not exist gameslog.csv (echo console,game_name,file-type,sha1_hash,date,time > gameslog.csv && echo %console%,%gamename%,%FILE-EXT%,%shahash%,%date%,%currtime%%amorpm% >> gameslog.csv) else (echo %console%,%gamename%,%FILE-EXT%,%shahash%,%date%,%currtime%%amorpm% >> gameslog.csv)
+if not exist gameslog.csv (echo console,game_name,file-type,sha1_hash,date,time>gameslog.csv && echo %console%,%gamename%,%FILE-EXT%,%shahash%,%date%,%currtime%%amorpm%>>gameslog.csv) else (echo %console%,%gamename%,%FILE-EXT%,%shahash%,%date%,%currtime%%amorpm%>>gameslog.csv)
 
 
 REM SET GAMENAME=
