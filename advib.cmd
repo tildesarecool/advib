@@ -110,6 +110,11 @@ REM pause
 
 IF %ERRORLEVEL% NEQ 0 GOTO ERROR-OCCURRED
 
+
+rem recently, for reasons I haven't figured out yet, ImgBurn started to prompt me to insert a disc after the initial rip
+rem if i push cancel ImgBurn closes and starts verifying without issue. I have no idea what is causing this.
+rem and it's only happening on one of the two PCs I'm use "advib" on.
+
 REM ImgBurn gripes if the verify is against the bin versus the cue file, so verify should done against the .cue
 
 ImgBurn.exe /mode verify /src %CDDRIVE% /dest %~dp0%CONSOLE%\%GAMENAME%_%CONSOLE%.%VEREXT% /start /eject yes /CLOSESUCCESS /WAITFORMEDIA
